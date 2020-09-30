@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Card {
+public class Card implements Comparable<Card>{
     private Rank rank;
     private Suit suit;   //масть
 
-    private final static Map<String, Card> CARD_CACHE = initCache();
+    private static Map<String, Card> CARD_CACHE = initCache();
 
     private  static Map<String, Card> initCache() {
         Map<String, Card> cache = new HashMap<>();
@@ -17,7 +17,7 @@ public class Card {
                 cache.put(cardKey(rank,suit), new Card(rank, suit));
             }
         }
-        return Collections.unmodifiableMap(cache)/*cache*/;
+        return cache;
     }
 
     private static String cardKey(Rank rank, Suit suit) {
@@ -29,8 +29,21 @@ public class Card {
         this.suit = suit;
     }
 
+    public static Card getCard(Rank rank, Suit suit) {
+        return CARD_CACHE.get(cardKey(rank, suit));
+    }
+
     @Override
     public String toString() {
         return this.rank + " of " + this.suit;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        if (this.rank.getValue() > o.rank.getValue())
+            return 1;
+        else if (this.rank.getValue() < o.rank.getValue())
+            return -1;
+        else return 0;
     }
 }
