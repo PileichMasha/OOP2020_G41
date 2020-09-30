@@ -9,15 +9,20 @@ public class Deck {
         this.deckCards = createDeck();
     }
 
-    private Stack<Card> createDeck() {
+    public Stack<Card> createDeck() {
         Stack<Card> deckCards = new Stack<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                deckCards.push(Card.getCard(rank, suit));
+                deckCards.push(new Card(rank, suit));
             }
         }
-        Collections.shuffle(deckCards);
+        //Collections.shuffle(deckCards);
+        //Collections.sort(deckCards);
         return deckCards;
+    }
+
+    public Card getCard() {
+        return deckCards.pop();
     }
 
     public Card drawFromDeck() {
