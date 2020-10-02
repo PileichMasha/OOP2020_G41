@@ -3,17 +3,17 @@ package main_package;
 import java.util.*;
 
 public class Deck {
-    private Stack<Card> deckCards;  //поменять на arraylist ?
+    private ArrayList<Card> deckCards;  //поменять на arraylist ?
 
     public Deck() {
         this.deckCards = createDeck();
     }
 
-    public Stack<Card> createDeck() {
-        Stack<Card> deckCards = new Stack<>();
+    public ArrayList<Card> createDeck() {
+        ArrayList<Card> deckCards = new ArrayList<>();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                deckCards.push(new Card(rank, suit));
+                deckCards.add(new Card(rank, suit));
             }
         }
         //Collections.shuffle(deckCards);
@@ -21,8 +21,12 @@ public class Deck {
         return deckCards;
     }
 
-    public Card getCard() {
-        return deckCards.pop();
+    /*public Card getCard() {
+        return deckCards.get(0);
+    }*/
+
+    public int size() {
+        return this.deckCards.size();
     }
 
     public Card drawFromDeck() {
