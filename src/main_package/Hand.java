@@ -18,6 +18,18 @@ public class Hand {
         countRanks();
     }
 
+    public Hand(Card[] cards) {
+        this.cards = cards;
+        this.ranksInHand = new int[15];
+        this.suitsInHand = new int[4];
+
+        countRanks();
+    }
+
+    public void setCards(Card[] cards) {
+        this.cards = cards;
+    }
+
     private void countRanks() {
         for (int i = 0; i <= 14 ; i++) {
             ranksInHand[i] = 0;
@@ -46,19 +58,16 @@ public class Hand {
     }
 
     public void checkRanks() {
-        int maxRep = 1; int minRep = 1;  //кол-во повторений
-        int maxPos = -1; int minPos;     //ранг, который повторяется
+        int maxRep = 0; int minRep = 0;  //кол-во повторений
+        int maxPos = -1; int minPos = -1;     //ранг, который повторяется
         for (int i = 2; i < 15; i++) {
             if (ranksInHand[i] != 0) {
-                if (ranksInHand[i] == maxRep) {  //не учитывает два одинаковых следующих друг за другом ранга
-                    maxPos = i;
-                } else if (ranksInHand[i] > maxRep) {
+                if (ranksInHand[i] >= maxRep) {
                     minRep = maxRep; minPos = maxPos;
                     maxRep = ranksInHand[i]; maxPos = i;
                 }
             }
         }
-
     }
 
     public Card[] getCards() {
@@ -72,25 +81,4 @@ public class Hand {
     public int[] getRanksInHand() {
         return ranksInHand;
     }
-
-    /*public void findSameRanks() {
-        int sameRank1 = 1;        //кол-во повторяющихся карт
-        int sameRank2 = 1;
-        int smallRankPos = 0; int bigRankPos = 0;     //карты какого ранга повторились
-        for (int i = 14; i >= 2 ; i--) {
-            if (ranksInHand[i] > sameRank1) {
-                //sameRank1 = ranksInHand[i];
-                if (sameRank1 != 1) {
-                    sameRank2 = sameRank1;
-                    smallRankPos = bigRankPos;
-                    //sameRank1 = ranksInHand[i];
-                }
-                sameRank1 = ranksInHand[i];
-                bigRankPos = i;
-            } else if (ranksInHand[i] > sameRank2) {
-                sameRank2 = ranksInHand[i];
-                smallRankPos = i;
-            }
-        }
-    }*/
 }
