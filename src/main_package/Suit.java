@@ -1,19 +1,25 @@
 package main_package;
 
 public enum Suit {
-    DIAMONDS("Diamonds"),  //бубны
-    CLUBS("Clubs"),        //крестье
-    HEARTS("Hearts"),      //червы
-    SPADES("Spades");      //пики
+    DIAMONDS("Diamonds", 1),  //бубны
+    CLUBS("Clubs", 2),        //крестье
+    HEARTS("Hearts", 3),      //червы
+    SPADES("Spades", 4);      //пики
 
-    private String val;
+    private String name;
+    private int value;
 
-    private Suit(String value) {
-        this.val = value;
+    private Suit(String name, int value) {
+        this.value = value;
+        this.name = name;
     }
 
-    public String getVal() {
-        return val;
+    public String getName() {
+        return this.name;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
 
